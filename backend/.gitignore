@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.log
+typedoc/
+package-lock.json
+package-lock.json.*
+
+.env
+.DS_STORE
+export/
