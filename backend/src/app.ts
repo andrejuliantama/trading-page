@@ -86,29 +86,37 @@ webSocketServer.on("connection", (socket: WebSocket) => {
 
     // check if there are matching asks and bids
     if (transaction.type === OrderType.BUY) {
-      orderBook = {
-        ...orderBook,
-        bids: {
-          ...orderBook.bids,
-          [transaction.order.price]: processOrderTrade(
-            transaction.type,
-            orderBook.bids?.[transaction.order.price] ?? [],
-            transaction.order
-          ),
-        },
-      };
+      const matchingPrice = orderBook.bids?.[transaction.order.price];
+
+      if (matchingPrice) {
+        orderBook = {
+          ...orderBook,
+          bids: {
+            ...orderBook.bids,
+            [transaction.order.price]: processOrderTrade(
+              transaction.type,
+              orderBook.bids?.[transaction.order.price] ?? [],
+              transaction.order
+            ),
+          },
+        };
+      }
     } else {
-      orderBook = {
-        ...orderBook,
-        asks: {
-          ...orderBook.asks,
-          [transaction.order.price]: processOrderTrade(
-            transaction.type,
-            orderBook.asks?.[transaction.order.price] ?? [],
-            transaction.order
-          ),
-        },
-      };
+      const matchingPrice = orderBook.asks?.[transaction.order.price];
+
+      if (matchingPrice) {
+        orderBook = {
+          ...orderBook,
+          asks: {
+            ...orderBook.asks,
+            [transaction.order.price]: processOrderTrade(
+              transaction.type,
+              orderBook.asks?.[transaction.order.price] ?? [],
+              transaction.order
+            ),
+          },
+        };
+      }
     }
 
     webSocketServer.clients.forEach((client) => {

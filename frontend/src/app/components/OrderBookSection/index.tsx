@@ -35,7 +35,6 @@ const OrderBookSection = (props: OrderBookSectionProps) => {
 
     ws.onmessage = (event) => {
       const data: OrderBook = JSON.parse(event.data);
-      console.log(data);
       setOrderBook(data);
     };
 
