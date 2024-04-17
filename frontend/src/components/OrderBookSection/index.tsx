@@ -22,7 +22,7 @@ const OrderBookSection = (props: OrderBookSectionProps) => {
   }, []);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8000/ws");
+    const ws = new WebSocket(`ws://${process.env.API_URL}/ws`);
 
     ws.onopen = () => {
       console.log("WebSocket Client Connected");
