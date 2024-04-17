@@ -1,10 +1,16 @@
 "use client";
-import OrderBookSection from "./components/OrderBookSection";
+import OrderBookSection from "../components/OrderBookSection";
 import { useEffect, useState } from "react";
-import Chart from "react-apexcharts";
+// import Chart from "react-apexcharts";
 import axios from "axios";
-import { CandlestickData } from "@/app/interfaces/CandlestickData";
+import { CandlestickData } from "@/interfaces/CandlestickData";
 import { v4 as uuidv4 } from "uuid";
+
+import dynamic from "next/dynamic";
+
+const Chart = dynamic(() => import("react-apexcharts"), {
+  ssr: false,
+});
 
 export default function Home() {
   const chartOptions: ApexCharts.ApexOptions = {

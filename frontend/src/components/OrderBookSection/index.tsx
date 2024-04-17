@@ -1,11 +1,6 @@
 "use client";
-import {
-  OptionalOrder,
-  Order,
-  OrderBook,
-  OrderType,
-} from "@/app/interfaces/OrderBook";
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { OptionalOrder, OrderBook, OrderType } from "@/interfaces/OrderBook";
+import { ChangeEvent, useEffect, useState } from "react";
 import { OrderBookSectionProps } from "./interface";
 import { sumOrderQuantity } from "./util";
 
